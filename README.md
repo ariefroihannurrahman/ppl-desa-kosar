@@ -18,9 +18,9 @@ Desa
 
 System Requirements :
 
-1. Sistem memiliki fitur pengaduan masyarakat 
-2. Sistem memiliki fitur up vote atau respon pengaduan
-3. Sistem dapat menampilkan informasi mengenai pengaduan
-4. Sistem memiliki fitur autentikasi
-5. Sistem memiliki fitur terima atau tolak pengaduan
-6. Sistem dapat mengelola pengaduan/laporan
+1. Sistem memiliki fitur pengaduan masyarakat - 10
+2. Sistem memiliki fitur up vote atau respon pengaduan - 4
+3. Sistem dapat menampilkan informasi mengenai pengaduan - 10
+4. Sistem memiliki fitur autentikasi - 8
+5. Sistem memiliki fitur terima atau tolak pengaduan - 9
+6. Sistem dapat mengelola pengaduan/laporan - 10
