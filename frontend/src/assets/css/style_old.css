@@ -1,0 +1,115 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.char-item {
+  margin: 1rem;
+  border-radius: 60px;
+  height: auto;
+  background-color: #100e0e;
+}
+
+.char-list {
+  height: 100%;
+  display: grid;
+  grid-gap: 3px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.char-item-img {
+  border-radius: 60px;
+  width: 100%;
+  margin: 0;
+}
+
+.char-item:hover {
+  padding: 1rem;
+}
+
+
+.char-item.name {
+  font-size: 28px;
+  color: #fff;
+  line-height: 1.2;
+  padding: 2rem;
+  background-color: transparent;
+  font-weight: 400;
+}
+
+.Loading {
+  display: inline-block;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  animation: logo-spin infinite 2s linear;
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.heading {
+  font-size: 24px;
+}
+
+.char-detail-card {
+  padding: auto;
+}
+
+.char-detail-card.name {
+  font-size: 30px;
+  padding: 0.5rem;
+  font-weight: bold;
+}
+
+.char-detail-card.species {
+  font-size: 20px;
+  padding: 0.5rem;
+  font-weight: 400;
+}
+
+button {
+  margin: 1rem 1rem;
+}
+
+.buttonload {
+  background-color: #04AA6D;
+  /* Green background */
+  border: none;
+  /* Remove borders */
+  color: white;
+  /* White text */
+  padding: 12px 16px;
+  /* Some padding */
+  font-size: 16px
+    /* Set a font size */
+}
+
+.form-error-msg {
+  font-size: 10px;
+  font-style: italic;
+  color: red;
+}
+
+.profile-image {
+  width: 50%;
+  height: 50%;
+  border-radius: 13px;
+}
+
