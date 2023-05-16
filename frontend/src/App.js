@@ -11,7 +11,7 @@ import TampilanLogin from "./components/TampilanLogin";
 import TampilanProfile from "./components/TampilanProfile";
 import TampilanAdmin from "./components/TampilanAdmin";
 import TambahKeluhan from "./components/TambahKeluhan";
-import TampilanPengaduan from "./components/TampilanPengaduan";
+import TampilanKeluhan from "./components/TampilanKeluhan";
 
 function App() {
   return (
@@ -29,8 +29,8 @@ function App() {
           <Route path="/admin/editkeluhan/:id" element={<EditKeluhan />} />
 
           <Route
-            path="/detailpengaduan/:keluhanid"
-            element={<TampilanPengaduan />}
+            path="/detailkeluhan/:keluhanid"
+            element={<TampilanKeluhan />}
           />
         </Routes>
       </BrowserRouter>

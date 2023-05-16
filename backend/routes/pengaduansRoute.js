@@ -28,7 +28,7 @@ const Keluhan = require("../models/keluhan");
 //       judulpengaduan: judulpengaduan,
 //       isipengaduan: isipengaduan,
 //       status: "Keluhan Diterima",
-      
+
 //     });
 
 //     await keluhantemp.save();

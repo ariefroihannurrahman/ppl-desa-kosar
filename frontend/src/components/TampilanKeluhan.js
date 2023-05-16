@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-import Swal from "sweetalert2";
 import { Card } from "react-bootstrap";
 
-function TampilanPengaduan({ match }) {
+function TampilanKeluhan({ match }) {
   const [keluhan, setkeluhan] = useState(true);
   const { keluhanid } = useParams();
 
@@ -82,4 +81,4 @@ function TampilanPengaduan({ match }) {
   );
 }
 
-export default TampilanPengaduan;
+export default TampilanKeluhan;

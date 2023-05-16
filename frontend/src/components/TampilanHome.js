@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Tab, Tabs } from "react-bootstrap";
-import Pengaduan from "./Pengaduan";
+import Pengaduan from "./DetailKeluhan";
 
 function TampilanHome() {
   const [keluhans, setkeluhans] = useState([]);

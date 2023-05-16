@@ -8,7 +8,7 @@ function TambahKeluhan() {
   const [kategori, setkategori] = useState("");
   const [judulpengaduan, setjudulpengaduan] = useState();
   const [isipengaduan, setisipengaduan] = useState();
-  const [keluhanlist, setkeluhanlist] = useState();
+
 
   async function addKeluhan() {
     const newkeluhan = {

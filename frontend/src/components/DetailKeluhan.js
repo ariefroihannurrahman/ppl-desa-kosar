@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ListGroup from "react-bootstrap/ListGroup";
 import Card from "react-bootstrap/Card";
 
-function Pengaduan({ keluhan }) {
+function DetailKeluhan({ keluhan }) {
   return (
     <div className="row datakeluhan">
       <div className="col-sm">
@@ -26,7 +26,7 @@ function Pengaduan({ keluhan }) {
             <ListGroup.Item>{keluhan.kategori}</ListGroup.Item>
           </ListGroup>
           <Card.Body>
-            <Link to={`/detailpengaduan/${keluhan._id}`}>
+            <Link to={`/detailkeluhan/${keluhan._id}`}>
               <button className="btn btn-primary">Detail Pengaduan</button>
             </Link>
           </Card.Body>
@@ -36,4 +36,4 @@ function Pengaduan({ keluhan }) {
   );
 }
 
-export default Pengaduan;
+export default DetailKeluhan;
