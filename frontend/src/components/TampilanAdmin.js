@@ -65,12 +65,26 @@ export function Pengaduans() {
           <tbody>
             {keluhans.length &&
               keluhans.map((keluhan, index) => {
+                  let statusClass = "";
+                  switch (keluhan.status) {
+                    case "Pending":
+                      statusClass = "status-pending";
+                      break;
+                    case "Diterima":
+                      statusClass = "status-diterima";
+                      break;
+                    case "Ditolak":
+                      statusClass = "status-ditolak";
+                      break;
+                    default:
+                      break;
+                  }
                 return (
                   <tr>
                     <td>{index + 1}</td>
                     <td>{keluhan.namawarga}</td>
                     <td>{keluhan.judulpengaduan}</td>
-                    <td>{keluhan.status}</td>
+                    <td className={statusClass}>{keluhan.status}</td>
                   </tr>
                 );
               })}

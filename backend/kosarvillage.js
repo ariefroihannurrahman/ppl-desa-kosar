@@ -6,13 +6,13 @@ const dbConfig = require("./dbmongose");
 
 const keluhansRoute = require("./routes/keluhansRoute");
 const penggunasRoute = require("./routes/penggunasRoute");
-const pengaduansRoute = require("./routes/pengaduansRoute");
+
 
 app.use(express.json());
 
 app.use("/api/keluhans", keluhansRoute);
 app.use("/api/penggunas", penggunasRoute);
-app.use("/api/pengaduans", pengaduansRoute);
+
 
 const port = process.env.PORT || 5000;
 

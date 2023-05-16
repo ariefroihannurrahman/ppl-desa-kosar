@@ -33,15 +33,6 @@ router.post("/addkeluhan", async (req, res) => {
   }
 });
 
-router.delete("/hapuskeluhan/:id", async (req, res) => {
-  try {
-    const hapuskeluhan = await Keluhan.deleteOne({ _id: req.params.id });
-    res.send(hapuskeluhan);
-  } catch (error) {
-    res.status(400).json({ error });
-  }
-});
-
 // progres edit
 
 router.get("/getkeluhansbyid/:id", async (req, res) => {
@@ -50,18 +41,6 @@ router.get("/getkeluhansbyid/:id", async (req, res) => {
     res.json(keluhan);
   } catch (error) {
     res.status(404).json({ message: err });
-  }
-});
-
-router.patch("/editkeluhan/:id", async (req, res) => {
-  try {
-    const edit = await Keluhan.updateOne(
-      { _id: req.params.id },
-      { $set: req.body }
-    );
-    res.status(200).json(edit);
-  } catch (error) {
-    res.status(400).json({ message: err });
   }
 });
 
@@ -85,14 +64,21 @@ router.post("/tolakkeluhan", async (req, res) => {
   try {
     const statusterima = await Keluhan.findOne({ _id: keluhanid });
 
-    statusterima.status = "DiTolak";
+    statusterima.status = "Ditolak";
     await statusterima.save();
     res.send("Okay");
-
-    
   } catch (error) {
     return res.status(400).json({ error });
   }
 });
+
+// router.delete("/hapuskeluhan/:id", async (req, res) => {
+//   try {
+//     const hapuskeluhan = await Keluhan.deleteOne({ _id: req.params.id });
+//     res.send(hapuskeluhan);
+//   } catch (error) {
+//     res.status(400).json({ error });
+//   }
+// });
 
 module.exports = router;

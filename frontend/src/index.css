@@ -161,3 +161,15 @@ b {
 .inic {
   margin-top: 10vh;
 }
+
+.status-pending {
+  color: #fec400;
+}
+
+.status-diterima {
+  color: #14bd96;
+}
+
+.status-ditolak {
+  color: #f12b2c;
+}

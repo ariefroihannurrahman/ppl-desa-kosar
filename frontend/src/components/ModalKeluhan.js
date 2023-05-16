@@ -70,6 +70,20 @@ function penomoran(number) {
 
 function ModalKeluhan({ keluhan, index }) {
   const urutan = penomoran(index + 1);
+  let statusClass = "";
+  switch (keluhan.status) {
+    case "Pending":
+      statusClass = "status-pending";
+      break;
+    case "Diterima":
+      statusClass = "status-diterima";
+      break;
+    case "Ditolak":
+      statusClass = "status-ditolak";
+      break;
+    default:
+      break;
+  }
 
   return (
     <div className="row">
@@ -86,7 +100,8 @@ function ModalKeluhan({ keluhan, index }) {
               </Link>
             </Card.Title>
             <Card.Text style={{ marginLeft: "40px" }}>
-              {keluhan.namawarga} | + Status
+              {keluhan.namawarga} |{" "}
+              <b className={statusClass}>{keluhan.status}</b>
             </Card.Text>
           </Card.Body>
         </Card>
