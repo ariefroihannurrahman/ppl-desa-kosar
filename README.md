@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-ini codingan web kosar
-=======
 User Requirements :
 
 Masyarakat
