@@ -1,36 +1,66 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import ListGroup from "react-bootstrap/ListGroup";
-import Card from "react-bootstrap/Card";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
-function DetailKeluhan({ keluhan }) {
+import { Card } from "react-bootstrap";
+
+function DetailKeluhan({ match }) {
+  const [keluhan, setkeluhan] = useState(true);
+  const { keluhanid } = useParams();
+
+  useEffect(() => {
+    (async () => {
+      if (!localStorage.getItem("pengeluh")) {
+        window.location.reload = "/login";
+      }
+
+      try {
+        const data = (
+          await axios.post("/api/keluhans/getkeluhanbyid", {
+            keluhanid,
+          })
+        ).data;
+        setkeluhan(data);
+      } catch (err) {}
+    })();
+  }, []);
+
+  // async function bookKeluhan() {
+  //   const keluhanDetails = {
+  //     keluhan,
+  //     penggunaid: JSON.parse(localStorage.getItem("pengeluh"))._id,
+  //   };
+
+  //   try {
+  //     const result = await axios.post(
+  //       "/api/pengaduans/bookkeluhan",
+  //       keluhanDetails
+  //     );
+  //     Swal.fire("Selamat", "Keluhan Berhasil", "success").then((result) => {
+  //       window.location.href = "/profile";
+  //     });
+  //     console.log(result);
+  //   } catch (error) {
+  //     console.log(error);
+  //     Swal.fire("Gagal", "Kesalahan Terjadi", "error");
+  //   }
+  // }
+
   return (
-    <div className="row datakeluhan">
-      <div className="col-sm">
-        <Card style={{ width: "18rem", marginLeft: "20px", marginTop: "20px" }}>
-          <Card.Body>
-            <Card.Title
-              style={{
-                color: "#366536",
-                fontWeight: "bold",
-                textAlign: "center",
-                marginBottom: "20px",
-              }}
-            >
-              {keluhan.namawarga}
-            </Card.Title>
-            <Card.Text>{keluhan.judulpengaduan}</Card.Text>
-          </Card.Body>
-          <ListGroup className="list-group-flush">
-            <ListGroup.Item>{keluhan.isipengaduan}</ListGroup.Item>
-            <ListGroup.Item>{keluhan.kategori}</ListGroup.Item>
-          </ListGroup>
-          <Card.Body>
-            <Link to={`/detailkeluhan/${keluhan._id}`}>
-              <button className="btn btn-primary">Detail Pengaduan</button>
-            </Link>
-          </Card.Body>
-        </Card>
+    <div className="tampilanhome row justify-content-around bs m-5">
+      <div className="col">
+        <Card.Title
+          style={{
+            color: "#366536",
+            fontWeight: "bold",
+          }}
+        >
+          Nama : {keluhan.namawarga}
+          <br></br>
+          Kategori : {keluhan.kategori}
+        </Card.Title>
+        <h1>Detail</h1>
+        <p>{keluhan.isipengaduan} </p>
       </div>
     </div>
   );

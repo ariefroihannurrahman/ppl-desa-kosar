@@ -9,7 +9,6 @@ function TambahKeluhan() {
   const [judulpengaduan, setjudulpengaduan] = useState();
   const [isipengaduan, setisipengaduan] = useState();
 
-
   async function addKeluhan() {
     const newkeluhan = {
       namawarga,
@@ -27,7 +26,7 @@ function TambahKeluhan() {
 
       console.log(result);
       Swal.fire("Okay", "Berhasil Tambah Keluhan", "success").then((result) => {
-        window.location.href = "/home";
+        window.location.href = "/tambahkeluhan";
       });
     } catch (error) {
       console.log(error);
@@ -57,12 +56,12 @@ function TambahKeluhan() {
             setkategori(e.target.value);
           }}
         >
+          <option value="">Pilih Kategori</option>
           <option>Keluhana</option>
           <option>Keluhanb</option>
           <option>Keluhanc</option>
           <option>Keluhand</option>
           <option>Keluhane</option>
-          
         </select>
         <label className="labelform">Judul Pengaduan</label>
         <input

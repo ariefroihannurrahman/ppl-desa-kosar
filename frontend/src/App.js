@@ -5,13 +5,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NavbarKosar from "./components/NavbarKosar";
 import EditKeluhan from "./components/EditKeluhan";
 import TampilanHome from "./components/TampilanHome";
-
 import TampilanRegister from "./components/TampilanRegister";
 import TampilanLogin from "./components/TampilanLogin";
 import TampilanProfile from "./components/TampilanProfile";
 import TampilanAdmin from "./components/TampilanAdmin";
 import TambahKeluhan from "./components/TambahKeluhan";
-import TampilanKeluhan from "./components/TampilanKeluhan";
+import DetailKeluhan from "./components/DetailKeluhan";
 
 function App() {
   return (
@@ -28,10 +27,7 @@ function App() {
           <Route path="/admin" element={<TampilanAdmin />} />
           <Route path="/admin/editkeluhan/:id" element={<EditKeluhan />} />
 
-          <Route
-            path="/detailkeluhan/:keluhanid"
-            element={<TampilanKeluhan />}
-          />
+          <Route path="/detailkeluhan/:keluhanid" element={<DetailKeluhan />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -14,7 +14,7 @@ const NavbarPage = () => {
   }
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar expand="lg">
       <Container>
         <Navbar.Brand href="/home">
           <img className="img-logo" src={logo} alt="" />

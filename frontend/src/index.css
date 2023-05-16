@@ -4,8 +4,14 @@
 }
 body {
   margin: 0;
+  background-image: url("./assets/background.png");
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.navbar {
+  background-image: url("./assets/background.png");
 }
 
 .img-logo {
@@ -21,29 +27,21 @@ nav {
   font-size: 20px;
 }
 
-h1 {
+/* h1 {
   font-size: 20px;
 }
-
-.bs {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  margin-top: 20px;
-  border-radius: 5px;
-  padding: 20px;
-}
+h2 {
+  font-size: 30px;
+  padding: 10px;
+  font-weight: bold;
+  text-align: center;
+} */
 
 input,
 select {
   box-shadow: none;
   margin-top: 10px;
   border: 1px solid black;
-}
-
-h2 {
-  font-size: 30px;
-  padding: 10px;
-  font-weight: bold;
-  text-align: center;
 }
 
 .appr {
@@ -58,32 +56,14 @@ h2 {
 }
 
 b {
-  color: #366536;
+  color: #152c5b;
 }
 
 .tabes {
   background-color: tomato;
 }
 
-/* room */
-
-.smallimg {
-  height: 70%;
-  width: 100%;
-  border-radius: 35px 5px 35px 5px;
-}
-
-.bigimg {
-  height: 400px;
-  border-radius: 35px 15px 35px 15px;
-}
-
-.datahotel {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  margin-top: 20px;
-  border-radius: 35px 5px 5px 5px;
-  padding: 20px;
-}
+/* keluhan */
 
 .desk {
   color: #219653;
@@ -107,15 +87,23 @@ b {
   padding: 10px;
 }
 
+.btndetail {
+  background-color: transparent;
+  border: none;
+  float: right;
+}
+
 /* home */
 
 .judul {
-  text-align: center;
   margin-top: 40px;
-  font-size: 80px;
   font-weight: bold;
-  color: #152c5b;
-  letter-spacing: 5px;
+  color: white;
+}
+
+.judul2 {
+  color: white;
+  font-size: 20px;
 }
 
 .form-control {
@@ -129,3 +117,27 @@ b {
   font-weight: bold;
 }
 
+.select-container {
+  position: relative;
+  display: inline-block;
+}
+
+.select-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #152c5b;
+}
+
+.tampilanhome {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin-top: 20px;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: white;
+}

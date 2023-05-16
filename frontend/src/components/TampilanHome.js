@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Tab, Tabs } from "react-bootstrap";
-import Pengaduan from "./DetailKeluhan";
+import ModalKeluhan from "./ModalKeluhan";
 
 function TampilanHome() {
   const [keluhans, setkeluhans] = useState([]);
@@ -45,75 +45,78 @@ function TampilanHome() {
   }
 
   return (
-    <div className="tampilanhome container ">
+    <div className="container ">
       <div className="row">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="cari keluhan"
-          value={searchkey}
-          onChange={(e) => {
-            setsearchkey(e.target.value);
-          }}
-          onKeyUp={filterBySearch}
-        />
-      </div>
-      <div className="col-sm">
-        {" "}
-        <select
-          className="form-control custom-select"
-          value={kategori}
-          onChange={(e) => {
-            filterByType(e.target.value);
-          }}
-        >
-          <option value="all">All</option>
-          <option value="keluhana">Keluhana</option>
-          <option value="keluhanb">Keluhanb</option>
-          <option value="keluhanc">Keluhanc</option>
-          <option value="keluhanc">Keluhand</option>
-          <option value="keluhanc">Keluhane</option>
-        </select>
-        <h1 className="judul">Selamat Datang</h1>
-        <h2 className="judul2">
-          Di Sistem Informasi Pengaduan <br></br>Masyarakat Desa Kosar
-        </h2>
-        <div className="m-3 bs">
-          <h2 className="text-center">
-            <b>Daftar Pengaduan</b>
-          </h2>
-          <Tabs
-            defaultActiveKey="adminpengaduan"
-            id="justify-tab-example"
-            className="mb-3"
-            justify
+        <div className="col-sm">
+          {" "}
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Cari"
+            value={searchkey}
+            onChange={(e) => {
+              setsearchkey(e.target.value);
+            }}
+            onKeyUp={filterBySearch}
+          />
+        </div>
+        <div className="col-sm">
+          {" "}
+          <select
+            className="form-control custom-select"
+            value={kategori}
+            onChange={(e) => {
+              filterByType(e.target.value);
+            }}
           >
-            <Tab eventKey="adminpengaduan" title="Terbaru">
-              {/* <Pengaduans /> */}
-            </Tab>
-            <Tab eventKey="adminkeluhan" title="Diproses">
-              {/* <Keluhans /> */}
-            </Tab>
-            <Tab eventKey="admintambahkeluhan" title="Selesai">
-              {/* <Addkeluhan /> */}
-            </Tab>
-            <Tab eventKey="adminpengguna" title="Ditolak">
-              {/* <Penggunas /> */}
-            </Tab>
-          </Tabs>
+            <option value="all">Pilih Kategori</option>
+            <option value="keluhana">Keluhana</option>
+            <option value="keluhanb">Keluhanb</option>
+            <option value="keluhanc">Keluhanc</option>
+            <option value="keluhanc">Keluhand</option>
+            <option value="keluhanc">Keluhane</option>
+          </select>
         </div>
       </div>
+      <h1 className="judul">Selamat Datang</h1>
+      <h2 className="judul2">
+        Di Sistem Informasi Pengaduan <br></br>Masyarakat Desa Kosar
+      </h2>
 
-      <div className="row justify-content-center mt-5">
-        {keluhans.length > 0
-          ? keluhans.map((keluhan) => {
-              return (
-                <div className="col-md-9 mt-3">
-                  <Pengaduan keluhan={keluhan} />
-                </div>
-              );
-            })
-          : console.log("err")}
+      <div className="tampilanhome">
+        <h2 className="text-center">
+          <b>Daftar Pengaduan</b>
+        </h2>
+        <Tabs
+          defaultActiveKey="keluhanterbaru"
+          id="justify-tab-example"
+          className="mb-3"
+          justify
+        >
+          <Tab eventKey="keluhanterbaru" title="Terbaru">
+            {/* <Pengaduans /> */}
+          </Tab>
+          <Tab eventKey="keluhandiproses" title="Diproses">
+            {/* <Keluhans /> */}
+          </Tab>
+          <Tab eventKey="keluhanselesai" title="Selesai">
+            {/* <Addkeluhan /> */}
+          </Tab>
+          <Tab eventKey="keluhanditolak" title="Ditolak">
+            {/* <Penggunas /> */}
+          </Tab>
+        </Tabs>
+        <div className="row justify-content-center">
+          {keluhans.length > 0
+            ? keluhans.map((keluhan, index) => {
+                return (
+                  <div className="col-md-9 mt-3">
+                    <ModalKeluhan keluhan={keluhan} index={index} />
+                  </div>
+                );
+              })
+            : console.log("err")}
+        </div>
       </div>
     </div>
   );
