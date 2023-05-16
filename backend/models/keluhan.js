@@ -18,6 +18,11 @@ const keluhanSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    status: {
+      type: String,
+      rqeuired: true,
+      default: "Pending",
+    },
   },
   {
     timestamps: true,

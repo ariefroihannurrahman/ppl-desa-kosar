@@ -65,4 +65,34 @@ router.patch("/editkeluhan/:id", async (req, res) => {
   }
 });
 
+router.post("/terimakeluhan", async (req, res) => {
+  const { keluhanid } = req.body;
+
+  try {
+    const statusterima = await Keluhan.findOne({ _id: keluhanid });
+
+    statusterima.status = "Diterima";
+    await statusterima.save();
+    res.send("Okay");
+  } catch (error) {
+    return res.status(400).json({ error });
+  }
+});
+
+router.post("/tolakkeluhan", async (req, res) => {
+  const { keluhanid } = req.body;
+
+  try {
+    const statusterima = await Keluhan.findOne({ _id: keluhanid });
+
+    statusterima.status = "DiTolak";
+    await statusterima.save();
+    res.send("Okay");
+
+    
+  } catch (error) {
+    return res.status(400).json({ error });
+  }
+});
+
 module.exports = router;
