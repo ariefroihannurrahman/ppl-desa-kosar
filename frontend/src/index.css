@@ -87,6 +87,14 @@ b {
   padding: 10px;
 }
 
+.crud {
+  color: white;
+  border: none;
+  border-radius: 10px 15px 10px 20px;
+  padding: 10px;
+  width: 100px;
+  margin-top: 2vh;
+}
 .btndetail {
   background-color: transparent;
   border: none;
@@ -140,4 +148,16 @@ b {
   border-radius: 5px;
   padding: 20px;
   background-color: white;
+}
+
+.tampilanadmin {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin-top: 20px;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: white;
+}
+
+.inic {
+  margin-top: 10vh;
 }

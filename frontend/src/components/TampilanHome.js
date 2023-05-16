@@ -45,7 +45,7 @@ function TampilanHome() {
   }
 
   return (
-    <div className="container ">
+    <div className="inic container">
       <div className="row">
         <div className="col-sm">
           {" "}

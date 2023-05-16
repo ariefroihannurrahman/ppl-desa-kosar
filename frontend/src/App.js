@@ -15,7 +15,6 @@ import DetailKeluhan from "./components/DetailKeluhan";
 function App() {
   return (
     <div className="App">
-      <NavbarKosar />
       <BrowserRouter>
         <Routes>
           <Route path="" element={<TampilanHome />} />
@@ -24,37 +23,21 @@ function App() {
           <Route path="/register" element={<TampilanRegister />} />
           <Route path="/login" element={<TampilanLogin />} />
           <Route path="/profile" element={<TampilanProfile />} />
-          <Route path="/admin" element={<TampilanAdmin />} />
+          <Route
+            path="/admin"
+            element={
+              <>
+                <NavbarKosar />
+                <TampilanAdmin />
+              </>
+            }
+          />
           <Route path="/admin/editkeluhan/:id" element={<EditKeluhan />} />
-
           <Route path="/detailkeluhan/:keluhanid" element={<DetailKeluhan />} />
         </Routes>
       </BrowserRouter>
     </div>
   );
 }
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <NavbarHotel />
-//       <BrowserRouter>
-//         <Routes>
-//           <Route path="" element={<TampilanHome />} />
-//           <Route path="/home" element={<TampilanHome />} />
-//           <Route
-//             path="/book/:roomid/:fromdate/:todate"
-//             element={<TampilanBooking />}
-//           />
-//           <Route path="/register" element={<TampilanRegister />} />
-//           <Route path="/login" element={<TampilanLogin />} />
-//           <Route path="/profile" element={<TampilanProfile />} />
-//           <Route path="/admin" element={<TampilanAdmin />} />
-//           <Route path="/admin/editkamar/:id" element={<EditKamar />} />
-//         </Routes>
-//       </BrowserRouter>
-//     </div>
-//   );
-// }
 
 export default App;

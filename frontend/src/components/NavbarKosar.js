@@ -24,8 +24,10 @@ const NavbarPage = () => {
           <Nav className="ms-auto right">
             {pengguna ? (
               <>
-                <Nav.Link href="/profile">Keranjang</Nav.Link>
-                <NavDropdown title={pengguna.name} id="basic-nav-dropdown">
+                <NavDropdown
+                  title={<span style={{ color: "white" }}>Admin</span>}
+                  id="basic-nav-dropdown"
+                >
                   <NavDropdown.Item href="" onClick={logout}>
                     Logout
                   </NavDropdown.Item>

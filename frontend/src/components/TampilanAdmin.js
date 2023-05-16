@@ -12,7 +12,7 @@ function Adminscreen() {
   }, []);
 
   return (
-    <div className="m-3 bs">
+    <div className="tampilanadmin m-3">
       <h2 className="text-center">
         <b>Admin Panel</b>
       </h2>
@@ -36,75 +36,41 @@ function Adminscreen() {
 export default Adminscreen;
 
 export function Pengaduans() {
-  const [pengaduans, setpengaduans] = useState([]);
+  const [keluhans, setkeluhans] = useState([]);
   useEffect(() => {
     (async () => {
       try {
-        const data = await (await axios.get("/api/pengaduans/getallpengaduans"))
+        const data = await (await axios.get("/api/keluhans/getallkeluhans"))
           .data;
-        setpengaduans(data);
+        setkeluhans(data);
       } catch (error) {
         console.log(error);
       }
     })();
   }, []);
 
-  async function approve(pengaduanid, keluhanid) {
-    try {
-      const result = await (
-        await axios.post("/api/pengaduans/approvekeluhan", {
-          pengaduanid,
-          keluhanid,
-        })
-      ).data;
-      console.log(result);
-      Swal.fire("Okay", "Keluhan Diterima", "success").then((result) => {
-        window.location.reload();
-      });
-    } catch (error) {
-      console.log(error);
-      Swal.fire("oops", "something went wrong", "error");
-    }
-  }
-
   return (
     <div className="row">
       <div className="col-md-12">
-        <h1>Pengaduans</h1>
+        <h1>Semua Keluhan</h1>
         <table className="table table-bordered ">
           <thead className="">
             <tr>
               <th>No</th>
-              <th>Pengaduan Id</th>
               <th>Nama Warga</th>
-              <th>judulpengaduan</th>
+              <th>Judul Pengaduan</th>
               <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            {pengaduans.length &&
-              pengaduans.map((pengaduan, index) => {
+            {keluhans.length &&
+              keluhans.map((keluhan, index) => {
                 return (
                   <tr>
                     <td>{index + 1}</td>
-                    <td>{pengaduan._id}</td>
-                    <td>{pengaduan.namawargaid}</td>
-                    <td>{pengaduan.judulpengaduan}</td>
-
-                    <td>{pengaduan.status}</td>
-
-                    <td className="col-1">
-                      {pengaduan.status !== "pending" && (
-                        <button
-                          className="appr btn-success"
-                          onClick={() => {
-                            approve(pengaduan._id, pengaduan.namawargaid);
-                          }}
-                        >
-                          Approve Pengaduan
-                        </button>
-                      )}
-                    </td>
+                    <td>{keluhan.namawarga}</td>
+                    <td>{keluhan.judulpengaduan}</td>
+                    <td>{keluhan.status}</td>
                   </tr>
                 );
               })}
@@ -138,6 +104,40 @@ export function Keluhans() {
     });
   };
 
+  async function terimaKeluhan(keluhanid) {
+    try {
+      const result = await (
+        await axios.post("/api/keluhans/terimakeluhan", {
+          keluhanid,
+        })
+      ).data;
+      console.log(result);
+      Swal.fire("Okay", "Keluhan Diterima", "success").then((result) => {
+        window.location.reload();
+      });
+    } catch (error) {
+      console.log(error);
+      Swal.fire("oops", "something went wrong", "error");
+    }
+  }
+
+  async function tolakKeluhan(keluhanid) {
+    try {
+      const result = await (
+        await axios.post("/api/keluhans/tolakkeluhan", {
+          keluhanid,
+        })
+      ).data;
+      console.log(result);
+      Swal.fire("Okay", "Keluhan Di Tolak", "success").then((result) => {
+        window.location.reload();
+      });
+    } catch (error) {
+      console.log(error);
+      Swal.fire("oops", "something went wrong", "error");
+    }
+  }
+
   return (
     <div className="row">
       <div className="col-md-12">
@@ -168,7 +168,7 @@ export function Keluhans() {
                     <td>{keluhan.isipengaduan}</td>
                     <td>{new Date(keluhan.createdAt).toLocaleDateString()}</td>
 
-                    <td>
+                    {/* <td className="col-1">
                       <Link to={`editkeluhan/${keluhan._id}`}>
                         <button className="crud btn-success">Terima</button>
                       </Link>
@@ -178,6 +178,29 @@ export function Keluhans() {
                       >
                         Tolak
                       </button>
+                    </td> */}
+
+                    <td className="col-1">
+                      {keluhan.status !== "pending" && (
+                        <button
+                          className="crud btn-success"
+                          onClick={() => {
+                            terimaKeluhan(keluhan._id);
+                          }}
+                        >
+                          Terima
+                        </button>
+                      )}
+                      {keluhan.status !== "pending" && (
+                        <button
+                          className="crud btn-danger"
+                          onClick={() => {
+                            tolakKeluhan(keluhan._id);
+                          }}
+                        >
+                          Tolak
+                        </button>
+                      )}
                     </td>
                   </tr>
                 );
