@@ -59,14 +59,16 @@ router.post("/terimakeluhan", async (req, res) => {
 });
 
 router.post("/tolakkeluhan", async (req, res) => {
-  const { keluhanid } = req.body;
+  const { keluhanid, alasanPenolakan } = req.body;
 
   try {
-    const statusterima = await Keluhan.findOne({ _id: keluhanid });
+    const keluhan = await Keluhan.findOne({ _id: keluhanid });
 
-    statusterima.status = "Ditolak";
-    await statusterima.save();
-    res.send("Okay");
+    keluhan.status = "Ditolak";
+    keluhan.alasanPenolakan = alasanPenolakan;
+    await keluhan.save();
+
+    res.send("Keluhan ditolak");
   } catch (error) {
     return res.status(400).json({ error });
   }

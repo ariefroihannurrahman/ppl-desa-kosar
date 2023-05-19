@@ -23,6 +23,9 @@ const keluhanSchema = mongoose.Schema(
       rqeuired: true,
       default: "Pending",
     },
+    alasanPenolakan: {
+      type: String,
+    },
   },
   {
     timestamps: true,

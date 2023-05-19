@@ -44,15 +44,15 @@ function penomoran(number) {
 
   if (number <= 19) {
     const ones = number % 10;
-    return defaultnumber[ones] + " " + belasan;
+    return "Ke " + defaultnumber[ones] + " " + belasan;
   }
 
   if (number <= 99) {
     const tens = Math.floor(number / 10);
     const ones = number % 10;
     return puluhan
-      ? defaultnumber[tens] + " " + puluhan + " " + defaultnumber[ones]
-      : defaultnumber[tens] + " " + defaultnumber[ones];
+      ? "Ke " + defaultnumber[tens] + " " + puluhan + " " + defaultnumber[ones]
+      : "Ke " + defaultnumber[tens] + " " + defaultnumber[ones];
   }
 
   if (number <= 999) {
@@ -60,11 +60,11 @@ function penomoran(number) {
     const tens = Math.floor((number % 100) / 10);
     const ones = number % 10;
     const tensText = puluhan
-      ? defaultnumber[tens] + " " + puluhan + " " + defaultnumber[ones]
-      : defaultnumber[tens] + " " + defaultnumber[ones];
+      ? "Ke " + defaultnumber[tens] + " " + puluhan + " " + defaultnumber[ones]
+      : "Ke " + defaultnumber[tens] + " " + defaultnumber[ones];
     return ratusan
-      ? defaultnumber[hundreds] + " " + ratusan + " " + tensText
-      : defaultnumber[hundreds] + " " + tensText;
+      ? "Ke " + defaultnumber[hundreds] + " " + ratusan + " " + tensText
+      : "Ke " + defaultnumber[hundreds] + " " + tensText;
   }
 }
 
@@ -73,8 +73,7 @@ function ModalKeluhan({ keluhan, index }) {
   let statusClass = "";
   switch (keluhan.status) {
     case "Pending":
-      statusClass = "status-pending";
-      break;
+      return null;
     case "Diterima":
       statusClass = "status-diterima";
       break;

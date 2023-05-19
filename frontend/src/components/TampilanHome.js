@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import ModalKeluhan from "./ModalKeluhan";
+import { Link } from "react-router-dom";
 
 function TampilanHome() {
   const [keluhans, setkeluhans] = useState([]);
@@ -106,6 +107,11 @@ function TampilanHome() {
             {/* <Penggunas /> */}
           </Tab>
         </Tabs>
+        <div className="fixed-bottom w-50 m-auto">
+          <Link to="/tambahkeluhan" className="btn pengaduan btn-block">
+            Buat Pengaduan
+          </Link>
+        </div>
         <div className="row justify-content-center">
           {keluhans.length > 0
             ? keluhans.map((keluhan, index) => {

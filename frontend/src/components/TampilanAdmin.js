@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
 
 function Adminscreen() {
   useEffect(() => {
@@ -59,31 +58,33 @@ export function Pengaduans() {
               <th>No</th>
               <th>Nama Warga</th>
               <th>Judul Pengaduan</th>
+              <th>Alasan Ditolak</th>
               <th>Status</th>
             </tr>
           </thead>
           <tbody>
             {keluhans.length &&
               keluhans.map((keluhan, index) => {
-                  let statusClass = "";
-                  switch (keluhan.status) {
-                    case "Pending":
-                      statusClass = "status-pending";
-                      break;
-                    case "Diterima":
-                      statusClass = "status-diterima";
-                      break;
-                    case "Ditolak":
-                      statusClass = "status-ditolak";
-                      break;
-                    default:
-                      break;
-                  }
+                let statusClass = "";
+                switch (keluhan.status) {
+                  case "Pending":
+                    statusClass = "status-pending";
+                    break;
+                  case "Diterima":
+                    statusClass = "status-diterima";
+                    break;
+                  case "Ditolak":
+                    statusClass = "status-ditolak";
+                    break;
+                  default:
+                    break;
+                }
                 return (
                   <tr>
                     <td>{index + 1}</td>
                     <td>{keluhan.namawarga}</td>
                     <td>{keluhan.judulpengaduan}</td>
+                    <td>{keluhan.alasanPenolakan}</td>
                     <td className={statusClass}>{keluhan.status}</td>
                   </tr>
                 );
@@ -97,6 +98,8 @@ export function Pengaduans() {
 
 export function Keluhans() {
   const [keluhans, setkeluhans] = useState([]);
+  const [alasanPenolakan, setAlasanPenolakan] = useState("");
+
   useEffect(() => {
     (async () => {
       try {
@@ -108,15 +111,6 @@ export function Keluhans() {
       }
     })();
   }, []);
-
-  const hapusKeluhan = (id) => {
-    axios.delete(`/api/keluhans/hapuskeluhan/${id}`).then((res) => {
-      console.log(res);
-      Swal.fire("Okay", "Delete Keluhan Berhasil", "success").then((result) => {
-        window.location.reload();
-      });
-    });
-  };
 
   async function terimaKeluhan(keluhanid) {
     try {
@@ -131,24 +125,53 @@ export function Keluhans() {
       });
     } catch (error) {
       console.log(error);
-      Swal.fire("oops", "something went wrong", "error");
+      Swal.fire("Oops", "Something went wrong", "error");
     }
   }
 
   async function tolakKeluhan(keluhanid) {
     try {
-      const result = await (
-        await axios.post("/api/keluhans/tolakkeluhan", {
-          keluhanid,
-        })
-      ).data;
-      console.log(result);
-      Swal.fire("Okay", "Keluhan Di Tolak", "success").then((result) => {
-        window.location.reload();
+      const result = await Swal.fire({
+        title: "Alasan Penolakan",
+        input: "textarea",
+        inputPlaceholder: "Masukkan alasan penolakan",
+        showCancelButton: true,
+        confirmButtonText: "Tolak",
+        cancelButtonText: "Batal",
+        showLoaderOnConfirm: true,
+        preConfirm: (alasan) => {
+          return axios
+            .post("/api/keluhans/tolakkeluhan", {
+              keluhanid,
+              alasanPenolakan: alasan,
+            })
+            .then((response) => {
+              if (response.data === "Keluhan ditolak") {
+                Swal.fire(
+                  "Okay",
+                  "Keluhan Ditolak dengan alasan : \n " + alasan,
+                  "success"
+                ).then((result) => {
+                  window.location.reload();
+                });
+              } else {
+                Swal.fire("Oops", "Something went wrong", "error");
+              }
+            })
+            .catch((error) => {
+              Swal.fire("Oops", "Something went wrong", "error");
+            });
+        },
+        allowOutsideClick: () => !Swal.isLoading(),
       });
+
+      if (result.isDismissed) {
+        // Jika tombol "Batal" ditekan
+        return;
+      }
     } catch (error) {
       console.log(error);
-      Swal.fire("oops", "something went wrong", "error");
+      Swal.fire("Oops", "Something went wrong", "error");
     }
   }
 
@@ -174,30 +197,24 @@ export function Keluhans() {
             {keluhans.length &&
               keluhans.map((keluhan, index) => {
                 return (
-                  <tr>
+                  <tr key={keluhan._id}>
                     <td>{index + 1}</td>
                     <td>{keluhan.namawarga}</td>
                     <td className="col-2">{keluhan.kategori}</td>
                     <td>{keluhan.judulpengaduan}</td>
                     <td>{keluhan.isipengaduan}</td>
-                    <td>{new Date(keluhan.createdAt).toLocaleDateString()}</td>
-
-                    {/* <td className="col-1">
-                      <Link to={`editkeluhan/${keluhan._id}`}>
-                        <button className="crud btn-success">Terima</button>
-                      </Link>
-                      <button
-                        className="crud btn-danger"
-                        onClick={() => hapusKeluhan(keluhan._id)}
-                      >
-                        Tolak
-                      </button>
-                    </td> */}
+                    <td>
+                      {new Date(keluhan.createdAt).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "2-digit",
+                        year: "numeric",
+                      })}
+                    </td>
 
                     <td className="col-1">
                       {keluhan.status !== "pending" && (
                         <button
-                          className="crud btn-success"
+                          className="terimakeluhan btn-success"
                           onClick={() => {
                             terimaKeluhan(keluhan._id);
                           }}
@@ -207,7 +224,7 @@ export function Keluhans() {
                       )}
                       {keluhan.status !== "pending" && (
                         <button
-                          className="crud btn-danger"
+                          className="tolakkeluhan btn-danger"
                           onClick={() => {
                             tolakKeluhan(keluhan._id);
                           }}
