@@ -27,7 +27,7 @@ function TambahKeluhan() {
 
       console.log(result);
       Swal.fire("Okay", "Berhasil Tambah Keluhan", "success").then((result) => {
-        window.location.href = "/tambahkeluhan";
+        window.location.href = "/home";
       });
     } catch (error) {
       console.log(error);

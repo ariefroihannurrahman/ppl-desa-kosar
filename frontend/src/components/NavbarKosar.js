@@ -4,13 +4,29 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import logo from "../assets/subang.png";
+import Swal from "sweetalert2";
 
 const NavbarPage = () => {
-  const pengguna = JSON.parse(localStorage.getItem("pengeluh"));
+  const pengguna = JSON.parse(localStorage.getItem("pengguna"));
 
   function logout() {
-    localStorage.removeItem("pengeluh");
-    window.location.href = "/login";
+    Swal.fire({
+      title: "Logout",
+      text: "Apakah Anda yakin ingin keluar?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya",
+      cancelButtonText: "Tidak",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem("pengguna");
+        Swal.fire("Okay", "Logout Berhasil", "success").then(() => {
+          window.location.href = "/login";
+        });
+      }
+    });
   }
 
   return (

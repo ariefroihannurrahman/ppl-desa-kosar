@@ -4,7 +4,7 @@ import { Col, Nav, Row, Tab } from "react-bootstrap";
 import { Tag } from "antd";
 
 function TampilanProfile() {
-  const pengguna = JSON.parse(localStorage.getItem("pengeluh"));
+  const pengguna = JSON.parse(localStorage.getItem("pengguna"));
 
   useEffect(() => {
     if (!pengguna) {

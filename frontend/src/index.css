@@ -79,6 +79,19 @@ b {
   padding: 10px;
 }
 
+.judullogin {
+  color: #10bca0;
+}
+
+.btnlogin {
+  background-color: #10bca0;
+  color: white;
+  border: none;
+  border-radius: 10px 15px 10px 20px;
+  padding: 10px;
+  margin-top: 20px;
+}
+
 .terimakeluhan,
 .tolakkeluhan {
   color: white;
@@ -157,6 +170,14 @@ b {
   margin-top: 20px;
   border-radius: 5px;
   padding: 20px;
+  background-color: white;
+}
+
+.tampilanlogin {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin-top: 20px;
+  border-radius: 5px;
+  padding: 2r0px;
   background-color: white;
 }
 

@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Tab, Tabs, Col, Nav, Row } from "react-bootstrap";
+import { Tab, Col, Nav, Row } from "react-bootstrap";
 import Swal from "sweetalert2";
 
 function Adminscreen() {
   useEffect(() => {
-    if (!JSON.parse(localStorage.getItem("pengeluh")).isAdmin) {
+    const pengguna = JSON.parse(localStorage.getItem("pengguna"));
+    if (!pengguna || !pengguna.isAdmin) {
       window.location.href = "/home";
     }
   }, []);
