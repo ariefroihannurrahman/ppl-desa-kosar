@@ -69,13 +69,13 @@ function DetailKeluhan({ match }) {
             <>
               <Container>
                 <Row className="text-center">
-                  <Col style={{ borderRight: "1px solid black" }} xs={4}>
+                  <Col style={{ borderRight: "1px solid black" }}>
                     <strong>Pengirim</strong> <br></br> {keluhan.namawarga}
                   </Col>
-                  <Col style={{ borderRight: "1px solid black" }} xs={4}>
+                  <Col style={{ borderRight: "1px solid black" }}>
                     <strong>Kategori</strong> <br></br> {keluhan.kategori}
                   </Col>
-                  <Col xs={4}>
+                  <Col>
                     <strong>Status</strong> <br></br>
                     <b
                       className={statusClass}
