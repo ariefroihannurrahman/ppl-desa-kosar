@@ -45,6 +45,11 @@ function DetailKeluhan({ match }) {
         backgroundColor = "#f12b2c";
         textColor = "white";
         break;
+      case "Selesai":
+        statusClass = "status-selesai";
+        backgroundColor = "#14bd96";
+        textColor = "white";
+        break;
       default:
         break;
     }

@@ -11,6 +11,37 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.dashboard-box {
+  text-align: center;
+  display: inline-block;
+  width: 200px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 5px;
+  color: white;
+}
+
+.angkas {
+  font-size: 25px;
+  font-weight: bold;
+}
+.laporanmasuk {
+  background-color: #02a0fc;
+}
+
+.laporanditerima {
+  background-color: #f5c446;
+}
+
+.laporanditolak {
+  background-color: #14bd96;
+}
+
+.laporanpending {
+  background-color: #02a0fc;
+}
+
 .navbar,
 .alasanpenolakan,
 .pengaduan,
@@ -77,6 +108,20 @@ b {
   border: none;
   border-radius: 10px 15px 10px 20px;
   padding: 10px;
+}
+
+.btnvoteup,
+.btnvotedown {
+  color: black;
+  border: none;
+}
+
+.btnvoteup {
+  background-color: transparent;
+}
+
+.btnvotedown {
+  background-color: #f12b2c;
 }
 
 .judullogin {
@@ -190,11 +235,15 @@ b {
 }
 
 .status-diterima {
-  color: #14bd96;
+  color: #fec400;
 }
 
 .status-ditolak {
   color: #f12b2c;
+}
+
+.status-selesai {
+  color: #14bd96;
 }
 
 .header {
@@ -276,7 +325,7 @@ b {
   }
 }
 
-@media only screen and (min-width: 601px) and (max-width: 1024px) {
+/* @media only screen and (min-width: 601px) and (max-width: 1024px) {
   .judul {
     font-size: 32px;
     margin-top: 30px;
@@ -346,4 +395,4 @@ b {
   .jdltambahkeluhan {
     font-size: 28px;
   }
-}
+} */

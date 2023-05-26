@@ -8,10 +8,12 @@ const keluhansRoute = require("./routes/keluhansRoute");
 const penggunasRoute = require("./routes/penggunasRoute");
 
 
+
 app.use(express.json());
 
 app.use("/api/keluhans", keluhansRoute);
 app.use("/api/penggunas", penggunasRoute);
+
 
 
 const port = process.env.PORT || 5000;

@@ -18,7 +18,8 @@ function TampilanRegister() {
       };
 
       try {
-        const result = await axios.post("/api/penggunas/register", pengguna).data;
+        const result = await axios.post("/api/penggunas/register", pengguna)
+          .data;
         setname();
         setemail();
         setpassword();
@@ -30,6 +31,7 @@ function TampilanRegister() {
           }
         );
       } catch (error) {
+        Swal.fire("oops", "something went wrong", "error");
         console.log(error);
       }
 

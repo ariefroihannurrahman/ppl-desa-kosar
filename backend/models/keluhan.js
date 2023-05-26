@@ -26,6 +26,10 @@ const keluhanSchema = mongoose.Schema(
     alasanPenolakan: {
       type: String,
     },
+    vote: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,

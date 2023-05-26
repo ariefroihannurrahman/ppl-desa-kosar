@@ -151,36 +151,20 @@ export function Terbaru() {
 }
 
 export function Selesai() {
-  const [keluhans, setkeluhans] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const data = (await axios.get("/api/keluhans/getallkeluhans")).data;
-        setkeluhans(data);
-      } catch (err) {
-        console.log("error");
-      }
-    })();
-  }, []);
-
-  const keluhansSelesai = keluhans.filter(
-    (keluhan) => keluhan.status === "Selesai"
-  );
-
-  const sortedKeluhans = keluhansSelesai.sort((a, b) => b.vote - a.vote);
-
   return (
     <div className="row justify-content-center">
-      {keluhansSelesai.length > 0
-        ? keluhansSelesai.map((keluhan, index) => {
-            return (
-              <div className="modals col-md-9">
-                <ModalKeluhan keluhan={keluhan} index={index} />
-              </div>
-            );
-          })
-        : console.log}
+      <div className="row">
+        <div className="col">
+          <Card className="cardmodal">
+            <Card.Body>
+              <Card.Title>Selesai</Card.Title>
+              <Card.Text>
+                <h1>Tampilan Selesai</h1>
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }
@@ -199,16 +183,12 @@ export function DiProses() {
     })();
   }, []);
 
-  // const keluhansDiProses = keluhans
-  //   .filter((keluhan) => keluhan.status === "Diterima")
-  //   .map((keluhan) => ({
-  //     ...keluhan,
-  //     status: "Diproses",
-  //   }));
-
-  const keluhansDiProses = keluhans.filter(
-    (keluhan) => keluhan.status === "Diproses"
-  );
+  const keluhansDiProses = keluhans
+    .filter((keluhan) => keluhan.status === "Diterima")
+    .map((keluhan) => ({
+      ...keluhan,
+      status: "Diproses",
+    }));
 
   const sortedKeluhans = keluhansDiProses.sort((a, b) => b.vote - a.vote);
 

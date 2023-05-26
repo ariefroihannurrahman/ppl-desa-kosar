@@ -2,6 +2,15 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Tab, Col, Nav, Row } from "react-bootstrap";
 import Swal from "sweetalert2";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from "recharts";
 
 function Adminscreen() {
   useEffect(() => {
@@ -13,7 +22,7 @@ function Adminscreen() {
 
   return (
     <div className="tampilanadmin m-3">
-      <Tab.Container id="left-tabs-example" defaultActiveKey="laporan">
+      <Tab.Container id="left-tabs-example" defaultActiveKey="dashboard">
         <Row>
           <Col sm={3}>
             <Nav variant="pills" className="flex-column">
@@ -30,7 +39,10 @@ function Adminscreen() {
           </Col>
           <Col sm={9}>
             <Tab.Content>
-              <Tab.Pane eventKey="dashboard"></Tab.Pane>
+              <Tab.Pane eventKey="dashboard">
+                <Dashboard />
+              </Tab.Pane>
+
               <Tab.Pane eventKey="laporan">
                 <Pengaduans />
                 <Keluhans />
@@ -44,6 +56,91 @@ function Adminscreen() {
 }
 
 export default Adminscreen;
+
+export function Dashboard() {
+  const [keluhans, setkeluhans] = useState([]);
+  const [totalKeluhan, setTotalKeluhan] = useState(0);
+  const [totalKeluhanDiterima, setTotalKeluhanDiterima] = useState(0);
+  const [totalKeluhanDitolak, setTotalKeluhanDitolak] = useState(0);
+  const [totalKeluhanPending, setTotalKeluhanPending] = useState(0);
+
+  const [chartData, setChartData] = useState({});
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("/api/keluhans/getallkeluhans");
+      const data = response.data;
+
+      setkeluhans(data);
+
+      const totalKeluhan = data.length;
+      setTotalKeluhan(totalKeluhan);
+
+      const totalKeluhanDiterima = data.filter(
+        (keluhan) => keluhan.status === "Diproses"
+      ).length;
+      setTotalKeluhanDiterima(totalKeluhanDiterima);
+
+      const totalKeluhanDitolak = data.filter(
+        (keluhan) => keluhan.status === "Ditolak"
+      ).length;
+      setTotalKeluhanDitolak(totalKeluhanDitolak);
+
+      const totalKeluhanPending = data.filter(
+        (keluhan) => keluhan.status === "Pending"
+      ).length;
+      setTotalKeluhanPending(totalKeluhanPending);
+
+      const chartData = [
+        { name: "Masuk", value: totalKeluhan, fill: "#FF0000" }, // Contoh warna merah (#FF0000)
+        { name: "Diterima", value: totalKeluhanDiterima, fill: "#00FF00" }, // Contoh warna hijau (#00FF00)
+        { name: "Ditolak", value: totalKeluhanDitolak, fill: "#0000FF" }, // Contoh warna biru (#0000FF)
+        { name: "Pending", value: totalKeluhanPending, fill: "#FFFF00" }, // Contoh warna kuning (#FFFF00)
+      ];
+
+      setChartData(chartData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <div className="dashboard-container">
+      <h1>Dashboard</h1>
+      <div className="laporanmasuk dashboard-box">
+        <p>Laporan Masuk</p>
+        <p className="angkas">{totalKeluhan}</p>
+      </div>
+      <div className="laporanditerima dashboard-box">
+        <p>Diterima</p>
+        <p className="angkas">{totalKeluhanDiterima}</p>
+      </div>
+      <div className="laporanditolak dashboard-box">
+        <p>Ditolak</p>
+        <p className="angkas">{totalKeluhanDitolak}</p>
+      </div>
+      <div className="laporanpending dashboard-box">
+        <p>Pending</p>
+        <p className="angkas">{totalKeluhanPending}</p>
+      </div>
+      <div className="chart-container justify-content-center">
+        <h1>Statistik Laporan</h1>
+        <BarChart width={500} height={300} data={chartData}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="value" />
+        </BarChart>
+      </div>
+    </div>
+  );
+}
 
 export function Pengaduans() {
   const [keluhans, setkeluhans] = useState([]);
@@ -74,6 +171,23 @@ export function Pengaduans() {
     indexOfLastKeluhan
   );
 
+  async function selesaiKeluhan(keluhanid) {
+    try {
+      const result = await (
+        await axios.post("/api/keluhans/selesaikeluhan", {
+          keluhanid,
+        })
+      ).data;
+      console.log(result);
+      Swal.fire("Okay", "Keluhan Selesai", "success").then((result) => {
+        window.location.reload();
+      });
+    } catch (error) {
+      console.log(error);
+      Swal.fire("Oops", "Something went wrong", "error");
+    }
+  }
+
   return (
     <div className="row">
       <div className="col-md-12">
@@ -86,6 +200,7 @@ export function Pengaduans() {
               <th>Judul Pengaduan</th>
               <th>Alasan Ditolak</th>
               <th>Status</th>
+              <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
@@ -111,6 +226,16 @@ export function Pengaduans() {
                   <td>{keluhan.judulpengaduan}</td>
                   <td>{keluhan.alasanPenolakan}</td>
                   <td className={statusClass}>{keluhan.status}</td>
+                  <td className="col-1">
+                    {keluhan.status !== "terima" && (
+                      <button
+                        className="terimakeluhan btn-success"
+                        onClick={() => selesaiKeluhan(keluhan._id)}
+                      >
+                        Selesai
+                      </button>
+                    )}
+                  </td>
                 </tr>
               );
             })}
@@ -157,7 +282,6 @@ export function Pengaduans() {
 
 export function Keluhans() {
   const [keluhans, setkeluhans] = useState([]);
-  const [alasanPenolakan, setAlasanPenolakan] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
 

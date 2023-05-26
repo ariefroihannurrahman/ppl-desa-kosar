@@ -33,8 +33,6 @@ router.post("/addkeluhan", async (req, res) => {
   }
 });
 
-// progres edit
-
 router.get("/getkeluhansbyid/:id", async (req, res) => {
   try {
     const keluhan = await Keluhan.findById(req.params.id);
@@ -50,7 +48,7 @@ router.post("/terimakeluhan", async (req, res) => {
   try {
     const statusterima = await Keluhan.findOne({ _id: keluhanid });
 
-    statusterima.status = "Diterima";
+    statusterima.status = "Diproses";
     await statusterima.save();
     res.send("Okay");
   } catch (error) {
@@ -74,12 +72,49 @@ router.post("/tolakkeluhan", async (req, res) => {
   }
 });
 
-// router.delete("/hapuskeluhan/:id", async (req, res) => {
+router.post("/selesaikeluhan", async (req, res) => {
+  const { keluhanid } = req.body;
+
+  try {
+    const statusselesai = await Keluhan.findOne({ _id: keluhanid });
+
+    statusselesai.status = "Selesai";
+    await statusselesai.save();
+    res.send("Okay");
+  } catch (error) {
+    return res.status(400).json({ error });
+  }
+});
+
+router.put("/:id/voteup", async (req, res) => {
+  try {
+    const keluhan = await Keluhan.findById(req.params.id);
+    if (!keluhan) {
+      return res.status(404).json({ message: "Keluhan tidak ditemukan" });
+    }
+
+    keluhan.vote += 1;
+    await keluhan.save();
+
+    return res.json({ message: "Vote berhasil ditingkatkan" });
+  } catch (error) {
+    return res.status(500).json({ message: "Terjadi kesalahan server" });
+  }
+});
+
+// router.put("/:id/votedown", async (req, res) => {
 //   try {
-//     const hapuskeluhan = await Keluhan.deleteOne({ _id: req.params.id });
-//     res.send(hapuskeluhan);
+//     const keluhan = await Keluhan.findById(req.params.id);
+//     if (!keluhan) {
+//       return res.status(404).json({ message: "Keluhan tidak ditemukan" });
+//     }
+
+//     keluhan.vote -= 1;
+//     await keluhan.save();
+
+//     return res.json({ message: "Vote berhasil diturunkan" });
 //   } catch (error) {
-//     res.status(400).json({ error });
+//     return res.status(500).json({ message: "Terjadi kesalahan server" });
 //   }
 // });
 

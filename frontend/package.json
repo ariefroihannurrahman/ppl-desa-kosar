@@ -14,11 +14,13 @@
     "react-bootstrap": "^2.7.0",
     "react-bootstrap-icons": "^1.10.3",
     "react-bootstrap-validation": "^0.1.11",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-file-base64": "^1.0.3",
     "react-icons": "^4.8.0",
     "react-router-dom": "^6.5.0",
     "react-scripts": "^2.1.3",
+    "recharts": "^2.6.2",
     "sonnet": "^0.0.1",
     "sweetalert2": "^11.4.8",
     "web-vitals": "^2.1.4"
